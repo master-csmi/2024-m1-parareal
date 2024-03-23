@@ -1,3 +1,10 @@
 = Parareal Algorithm Study
 
 == Context
+
+
+This repository contains code for simulating the Lorenz system using the Parareal algorithm for parallel time integration.
+The Lorenz system is a set of ordinary differential equations that models a dynamic system exhibiting chaotic behavior. 
+It was proposed by meteorologist Edward Lorenz in 1963 and has since been widely used to study phenomena such as convection and turbulence.
+
+
