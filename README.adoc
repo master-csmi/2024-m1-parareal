@@ -1,7 +1,7 @@
 = Parareal Algorithm Study
 
 == Context
-# Lorenz System with Parareal Algorithm
+
 
 This repository contains code for simulating the Lorenz system using the Parareal algorithm for parallel time integration.
 The Lorenz system is a set of ordinary differential equations that models a dynamic system exhibiting chaotic behavior. 
