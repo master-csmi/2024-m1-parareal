@@ -1,10 +1,8 @@
-= Parareal Algorithm Study
+= Exploring Chaos Theory: The Lorenz System and Parareal Algorithm
 
 == Context
+This project aims to gain insights and deepen understanding of chaos theory and parallel computing by exploring the Lorenz system and parareal algorithm.
 
-
-This repository contains code for simulating the Lorenz system using the Parareal algorithm for parallel time integration.
-The Lorenz system is a set of ordinary differential equations that models a dynamic system exhibiting chaotic behavior. 
-It was proposed by meteorologist Edward Lorenz in 1963 and has since been widely used to study phenomena such as convection and turbulence.
-
-
+== Contributors
+- [Oussama BOUHENNICHE](https://github.com/oussama-floor9)
+- [Narimane ZAOUACHE](https://github.com/zaouache)
