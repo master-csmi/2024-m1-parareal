@@ -1,7 +1,7 @@
-# Exploring Chaos Theory: The Lorenz System and Parareal Algorithm
+# The Lorenz System and Parareal Algorithm
 
 ## Context
-This project aims to gain insights and deepen understanding of chaos theory and parallel computing by exploring the Lorenz system and parareal algorithm.
+This project aims to gain insights and deepen understanding of Parareal algorithm by exploring the Lorenz system.
 
 ## Contributors
 - <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
