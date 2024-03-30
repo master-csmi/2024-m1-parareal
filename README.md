@@ -1,7 +1,7 @@
 # The Lorenz System and Parareal Algorithm
 
 ## Context
-the development of the parareel algorithm in feel++ in parallel and in C++.
+the development of the parareal algorithm in feel++ in parallel and in C++.
 
 ## Roadmap
 - Implement Lorenz Model for order 1 and 4 using constant time steppin.
