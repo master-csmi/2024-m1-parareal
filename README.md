@@ -1,4 +1,4 @@
-# The Lorenz System and Parareal Algorithm
+# Parareal Algorithm
 
 ## Context
 the development of the parareal algorithm in feel++ in parallel and in C++.
