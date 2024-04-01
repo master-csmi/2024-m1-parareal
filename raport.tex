@@ -2,7 +2,7 @@
 \usepackage{graphicx}
 \usepackage{lipsum}
 
-\title{Report on the Lorenz System and Parareal}
+\title{Parareal Algorithm}
 \author{Oussama  BOUHENNICHE, 
 Narimane ZAOUACHE}
 \date{\today}
@@ -12,19 +12,31 @@ Narimane ZAOUACHE}
 \maketitle
 
 \begin{abstract}
-    The Lorenz system is a set of ordinary differential equations that models a dynamic system exhibiting chaotic behavior. 
-    Proposed by meteorologist Edward Lorenz in 1963, this system of equations is widely used to study phenomena such as convection and turbulence. 
-    This report explores the Lorenz system, presents its mathematical model, and discusses how it can be numerically solved. 
-    Additionally, it examines the parallelization approach for calculating the trajectory of the Lorenz system, illustrated with a Python code example.
+    Solving time-de­pendent partial differe­ntial equations (PDEs) numerically is 
+    a significant task in computational domains. Traditional methods can be­ 
+    time-consuming, especially for long simulations or comple­x systems. 
+    The Parareal algorithm \cite{lions2001resolution} offe­rs an efficient parallel solution to acce­lerate PDE solving.
+
+    In this project, we aim to implement the Parareal algorithm in feel++ framework in parallel and in C++. 
+    By integrating the Parareal algorithm with Feel++, 
+    we can leverage the advanced numerical methods and parallel computing 
+     capabilities of both frameworks to tackle challenging time-dependent PDE problems.
     \end{abstract}
 
 \section{Introduction}
- The Lorenz system, introduced by meteorologist Edward Lorenz in 1963, 
+
+ 
+ \section{Methodology}
+ \subsection{Implementing the Lorenz model}
+
+
+ The Lorenz system\cite{lorenz1963deterministic}, introduced by meteorologist Edward Lorenz in 1963, 
  is a set of nonlinear ordinary differential equations describing the behavior of a dynamic system. 
  This system is used as a mathematical model to study phenomena such as convection and turbulence, 
  as well as in other areas such as population dynamics, chaos theory, and control theory.
- 
- \section{Mathematical Model}
+
+
+
  The Lorenz system is described by the following three equations:
 
  \[
@@ -45,28 +57,24 @@ $\sigma = 10$, $b = 8/3$, and $\rho = 28$, a large set of solutions are attracte
 The trajectory seems to randomly jump betwen the two wings of the butterfly. 
 The behavior exhibited by the system is called "chaos", while this type of attractor is called a "strange attractor". 
 
-\section{Numerical Solution}
 The numerical solution of the Lorenz system involves using numerical methods to approximate the trajectory of the state variables over time. 
 Two commonly used methods are the fourth-order Runge-Kutta (RK4) method and the Euler method.
 
-\subsection{Fourth-Order Runge-Kutta (RK4) Method}
+\subsubsection{First-order method: Euler Method}
+The Euler method is an iterative method that involves approximating the temporal derivatives 
+of the state variables using finite differences and using these approximations to update the values of the state variables at each time step. 
+
+\subsubsection{Fourth-order method: Runge-Kutta (RK4) Method}
 The fourth-order Runge-Kutta (RK4) method is an iterative method that involves discretizing 
 time and using iterations to compute the values of the state variables at each time step. 
 This method uses four successive approximations to improve the accuracy of the solution. 
 
-\subsection{Euler Method}
-The Euler method is an iterative method that involves approximating the temporal derivatives 
-of the state variables using finite differences and using these approximations to update the values of the state variables at each time step. 
 
-\section{Parallelization with Parareal Algorithm}
-Parallelizing the computation of the Lorenz system trajectory can also be achieved using the Parareal algorithm, 
-which is a parallel-in-time integration method.
-The Parareal algorithm divides the time domain into multiple subintervals and solves the differential equations sequentially on each subinterval, 
-while periodically exchanging information between adjacent subintervals to improve accuracy.
+\section{Results and Discussion}
+
 
 \section{Conclusion}
-Exploring the Lorenz system has deepened our understanding of chaotic phenomena in dynamical systems. 
-The equations describing this system were numerically solved using two classical methods: the Euler 
-method and the fourth-order Runge-Kutta method. This study has provided a fascinating insight into 
-chaotic phenomena and the numerical techniques used to analyze them.
+
+\bibliographystyle{plain}
+\bibliography{./References}
 \end{document}
