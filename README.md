@@ -1,7 +1,20 @@
-# The Lorenz System and Parareal Algorithm
+# Parareal Algorithm
 
 ## Context
-This project aims to gain insights and deepen understanding of Parareal algorithm by exploring the Lorenz system.
+the development of the parareal algorithm in feel++ in parallel and in C++.
+
+## Roadmap
+- Implement Lorenz Model for order 1 and 4 using constant time steppin.
+- Add support for Lorenz results visualisation.
+- Study sundials with constant and adaptive time stepping.
+- Study scipy.ode with constant and adaptive time stepping.
+- Study parareal algorithm.
+- Implement initial version of parareal in sequential.
+- Compare different ode solvers and parareal on Lorenz system.
+- Study a parallel version of parareal algorithm.
+- Implement parallel version of parareal algorithm.
+- Study the possibility of use parareal with feel++.
+- Implement use of parareal with feel++ (if applicable).
 
 ## Contributors
 - <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
