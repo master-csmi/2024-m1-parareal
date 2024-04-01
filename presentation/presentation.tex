@@ -1,7 +1,11 @@
-
 \documentclass[
 	11pt,
 ]{beamer}
+
+\newcommand\myheading[1]{%
+  \par\bigskip
+  {\Large\bfseries#1}\par\smallskip}
+
 
 \graphicspath{{Images/}{./}} 
 
@@ -41,7 +45,7 @@
 %	PRESENTATION INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title[Lorenz System and Parareal]{ \text{Exploring Chaos Theory} \\ \textbf{The Lorenz System and Parareal Algorithm}}
+\title[Parareal Algorithm]{\\ \textbf{Parareal Algorithm}}
 
 
 \author[O. BOUHENNICHE \and N. ZAOUACHE]{Oussama BOUHENNICHE \and Narimane ZAOUACHE}
@@ -64,28 +68,65 @@
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS SLIDE
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Presentation Overview}
+
+	\tableofcontents
+\end{frame}
+%----------------------------------------------------------------------------------------
 %	PRESENTATION BODY SLIDES
 %----------------------------------------------------------------------------------------
 
-\section{Chaos Theory and Lorenz System} 
+
+\section{Parareal algorithm}
 
 %------------------------------------------------
 \begin{frame}
-    \frametitle{Chaos Theory and Lorenz System}
+	\frametitle{Parareal algorithm}
+	Parareal is a parallel algorithm from numerical analysis and used for
+	the solution of initial value problems\cite{lions2001resolution}.
+
 	\begin{columns}[c]
-		\begin{column}{0.65\textwidth} 
+		\begin{column}{\textwidth}
 			\begin{itemize}
-				\item Definition of chaos theory.
-				\item Introduction of the butterfly effect concept.
-				\item Aiming to explore how tiny causes lead to huge effects in chaotic systems.
-				\item Aiming to explore Lorenz system and Parareal algorithm.
+				\item Was introduced in 2001 by Lions, Maday and Turinici.
+				\item Has become one of the most widely studied parallel-in-time integration methods.
 			\end{itemize}
 		\end{column}
-		\begin{column}{0.35\textwidth}
-			\begin{figure}
-				\includegraphics[width=1\linewidth]{butterfly.jpg}
-			\end{figure}
+	\end{columns}
+
+\end{frame}
+
+%------------------------------------------------
+
+\section{Context and objectives}
+
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Context and Objectives}
+	\myheading{Context}
+
+
+	the development of the parareal algorithm in feel++ in parallel and in C++.
+
+	\myheading{Objectives}
+
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{itemize}
+				\item Study parareal algorithm.
+				\item Study a parallel version of parareal algorithm.
+				\item Use Lorenz System\cite{lorenz1963deterministic} as test case.
+				\item Compare different ode solvers and parareal.
+				\item Implement parallel version of parareal algorithm.
+				\item Study the possibility of use parareal with feel++.
+				\item Implement use of parareal with feel++ (if applicable).
+			\end{itemize}
 		\end{column}
+
 	\end{columns}
 
 \end{frame}
@@ -94,29 +135,42 @@
 
 \section{Roadmap}
 \begin{frame}
-    \frametitle{Roadmap}
+	\frametitle{Roadmap}
 	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
+		\begin{column}{\textwidth}
 			\begin{itemize}
-				\item Brief overview of project objectives.
-				\item Steps: Implementing Lorenz Model, studying ODE solvers, exploring Parareal algorithm
-				\item Emphasis on iterative and comparative nature of the project
+				\item Implement Lorenz Model for order 1 and 4 using constant time steppin and add support for Lorenz results visualisation.
+				\item Study sundials and scipy.ode with constant and adaptive time stepping.
+				\item Study parareal algorithm and Implement initial version of parareal in sequential.
+				\item Compare different ode solvers and parareal on Lorenz system.
+				\item Study and Implement a parallel version of parareal algorithm.
+				\item Study the possibility of use parareal with feel++.
+				\item Implement use of parareal with feel++ (if applicable).
 			\end{itemize}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=1\linewidth]{roadmap.png}
-			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Github Roadmap}
+	\begin{figure}
+		\includegraphics[width=.90\linewidth]{roadmap.jpg}
+	\end{figure}
+\end{frame}
+
 %------------------------------------------------
 
-\section{Conclusion}
+\section{References}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
+	\bibliographystyle{plain}
+	\bibliography{../References}
+  \end{frame}
+
+%------------------------------------------------
 
 \begin{frame}
-	\frametitle{Conclusion}
 	\begin{center}
 		{\Huge The End}
 
@@ -127,5 +181,6 @@
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+
 
 \end{document}
