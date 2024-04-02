@@ -85,19 +85,27 @@
 
 %------------------------------------------------
 \begin{frame}
-	\frametitle{Parareal algorithm}
-	Parareal is a parallel algorithm from numerical analysis and used for
-	the solution of initial value problems\cite{lions2001resolution}.
-
-	\begin{columns}[c]
-		\begin{column}{\textwidth}
-			\begin{itemize}
-				\item Was introduced in 2001 by Lions, Maday and Turinici.
-				\item Has become one of the most widely studied parallel-in-time integration methods.
-			\end{itemize}
-		\end{column}
-	\end{columns}
-
+    \frametitle{Parareal algorithm}
+    Parareal is a parallel algorithm from numerical analysis and used for
+    the solution of initial value problems\cite{lions2001resolution}.
+    Was introduced in 2001 by Lions, Maday and Turinici.
+    \vspace{\baselineskip}
+    It works by dividing the time interval of interest into smaller subintervals and
+    solving them concurrently using both coarse and fine solvers.
+    \begin{columns}[c]
+        \begin{column}{0.45\textwidth}
+            \begin{itemize}
+                \item The coarse solver provides a rough approximation of the solution over each subinterval.
+                \item The fine solver refines this approximation to improve accuracy.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=1.\linewidth]{parareal.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    These solutions are then iteratively corrected and synchronized to produce an accurate overall solution.
 \end{frame}
 
 %------------------------------------------------
