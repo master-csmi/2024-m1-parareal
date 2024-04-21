@@ -69,6 +69,16 @@ The fourth-order Runge-Kutta (RK4) method is an iterative method that involves d
 time and using iterations to compute the values of the state variables at each time step. 
 This method uses four successive approximations to improve the accuracy of the solution. 
 
+\section{odeint and solve\_ivp}
+SciPy is an open-source Python library specialized in scientific and technical computing. It offers a wide range of functionalities for solving mathematical, scientific, and engineering problems, thanks to its numerous specialized sub-modules. Among these sub-modules, \texttt{scipy.integrate} is dedicated to numerical integration, allowing for the solution of ordinary differential equations.
+\subsection{scipy.integrate}
+This sub-library offers functions such as \texttt{odeint} and \texttt{solve\_ivp} for solving ODEs, as well as other methods for single and multiple function integratio
+\subsubsection{odeint from scipy.integrate}
+The \texttt{odeint} function from \texttt{scipy.integrate} is widely used for numerically solving systems of ordinary differential equations (ODEs) with initial conditions. It uses the LSODA (Livermore Solver for Ordinary Differential Equations) algorithm to perform integration, thus providing a fast and efficient solution. Although simple to use, \texttt{odeint} is limited in terms of control over integration methods and does not allow for the specification of events or constraints.
+\subsubsection{solve\_ivp from scipy.integrate}
+The \texttt{solve\_ivp} function from \texttt{scipy.integrate} offers a more unified and flexible interface for solving ODEs. It supports a variety of integration methods, including RK45 and RK23, and also allows for the specification of events and constraints for flexible termination conditions. \texttt{solve\_ivp} is thus more versatile than \texttt{odeint}, providing increased control over the integration process and suitable for a wider variety of ODE problems.
+\subsection{Conclusion}
+Overall, \texttt{scipy.integrate} from SciPy offers powerful tools for solving a variety of numerical integration problems, especially ODEs. While \texttt{odeint} is simple to use and fast for common cases, \texttt{solve\_ivp} offers finer flexibility and control, making it suitable for a broader range of problems. The choice between these two functionalities will depend on the specific requirements of the problem at hand. By combining the power of SciPy with the functionality of \texttt{scipy.integrate}, users can effectively address a wide range of mathematical and scientific challenges in Python.
 
 \section{Results and Discussion}
 
