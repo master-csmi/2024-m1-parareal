@@ -1,0 +1,7 @@
+scipy
+numpy
+sympy
+matplotlib
+plotly
+ipython
+ipykernel
