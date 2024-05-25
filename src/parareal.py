@@ -10,7 +10,7 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
     :param F: Fonction fine
     :param y0: Condition initiale
     :param K: Nombre d'itérations Parareal
-    :return: Solution approximative y aux points de discrétisation
+    :return: t, nombre d'iterations, Solution approximative y aux points de discrétisation
     """
     
     times = np.linspace(tspan[0], tspan[1], N + 1)
@@ -35,10 +35,8 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
             u[i+1] = G_[i+1] + F_[i+1] - G_prev[i+1]
 
         # Check the stopping criterion
-        error = np.linalg.norm(u - u_prev)
-        print(error)
         if np.linalg.norm(u - u_prev) < tol:
             break
 
-    return iter, u
+    return times,iter, u
 
