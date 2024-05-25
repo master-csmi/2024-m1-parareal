@@ -5,3 +5,5 @@ matplotlib
 plotly
 ipython
 ipykernel
+mpi4py
+
