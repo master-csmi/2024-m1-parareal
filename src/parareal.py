@@ -21,7 +21,8 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
         
     u = np.array(u)
     G_ = u 
-    F_ = u
+    F_ = np.zeros_like(u)
+    F_[0] = y0
     
     for iter in range(K):
         u_prev = u.copy()
@@ -35,8 +36,10 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
             u[i+1] = G_[i+1] + F_[i+1] - G_prev[i+1]
 
         # Check the stopping criterion
-        if np.linalg.norm(u - u_prev) < tol:
+        error = np.linalg.norm(u - u_prev)/len(times)
+        print(f"Iteration {iter}, Error: {error}")
+        if error < tol:
             break
 
-    return times,iter, u
+    return times,iter+1, u
 
