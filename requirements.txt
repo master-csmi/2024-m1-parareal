@@ -5,5 +5,5 @@ matplotlib
 plotly
 ipython
 ipykernel
+nbformat
 mpi4py
-
