@@ -159,10 +159,62 @@ Narimane ZAOUACHE}
    where $ \epsilon $ is a predefined tolerance. \cite{pararealwikipedia}
 
 \section{Results and Discussion}
+\subsection{Euler Method (Implicit and Explicit)}
+\subsection{Advantages}
+ \paragraph{Implicit Euler}: Increased stability for larger time steps.
+ 
+\paragraph{Explicit Euler}: Ease of implementation and faster computation.
+
+\subsection{Disadvantages}
+\paragraph{Implicit Euler}: More complex computation per time step.
+\paragraph{Explicit Euler}: Less stable for larger time steps.
+
+\subsection{Runge-Kutta Method (Orders 2 and 4)}
+\subsection{Advantages}
+\paragraph{RK2}: Better accuracy than Euler method.
+
+\paragraph{RK4}: Even more accurate than RK2 with the same number of function evaluations.
+
+
+\subsection{Disadvantages}
+\paragraph{RK2}: Less accurate than RK4.
+
+\paragraph{RK4}:  More computationally expensive per time step.
+
+\subsection{$odeint$ and $solve_ivp$ Functions}
+\subsection{Advantages}
+\paragraph{$odeint$}: User-friendly for those familiar with SciPy.
+
+\paragraph{$solve_ivp$}: More features and controls over the solving process.
+
+\subsection{Disadvantages}
+\paragraph{$odeint$}: Less flexible and may require additional manipulation for certain problems.
+
+\paragraph{$solve_ivp$}: May be more complex for beginner users.
+
+\subsection{Parareal Algorithm}
+\subsection{Advantages}
+\paragraph{Parallel Computation}: Reduces computation time by utilizing multiple processors.
+
+\paragraph{Increased Accuracy:}: Can achieve high accuracy with successive iterations.
+
+\subsection{Disadvantages}
+\paragraph{Implementation Complexity:}
+: Requires more complex implementation compared to sequential methods.
+
+\paragraph{Dependency on Parallel Resources} : Requires parallel computing infrastructure to fully leverage its advantages.
+
+
+\paragraph*{} We compared the  methods in terms of accuracy and computation time.                                     
+The Parareal algorithm was the most accurate of the methods. It was able to obtain an exact solution with a much smaller number of time steps compared to the Runge-Kutta and Euler methods, ans  was the slowest of the methods. This is because it uses two propagators, a coarse propagator and a fine propagator. The Runge-Kutta and Euler methods were faster but less accurate.
+
+The Parareal algorithm is a powerful method for solving ODEs with high precision. However, it can be slow, especially for problems that require a large number of time steps. The Runge-Kutta and Euler methods are faster but can be less accurate. The choice of method depends on the required precision and available resources.
+
+
 
 
 \section{Conclusion}
-
+Each ODE-solving method presented in this report has its own strengths, weaknesses, and suitable application areas. Euler, Runge-Kutta, odeint, and $solve_ivp$ methods are sequential approaches suitable for many problems. However, the Parareal algorithm stands out for its ability to reduce computation time using parallel computation, making it an attractive choice for problems requiring high precision over long time intervals. The choice of method will depend on the specific requirements of precision, computation speed, and implementation complexity of the problem being solved.
 \bibliographystyle{plain}
 \bibliography{./References}
 \end{document}
