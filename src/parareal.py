@@ -41,5 +41,5 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
         if error < tol:
             break
 
-    return times,iter+1, u
+    return times, iter + 1, u
 
