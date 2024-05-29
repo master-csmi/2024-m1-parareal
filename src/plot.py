@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+# Polt function for 3D problems
 def plot3d(t, sol, title="3D plot"):
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_subplot(projection='3d')
