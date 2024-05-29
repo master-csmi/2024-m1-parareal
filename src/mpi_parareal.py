@@ -12,7 +12,7 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
     :param N: Number of sub-intervals
     :param K: Number of Parareal iterations
     :param tol: Tolerance for stopping criterion
-    :return: Approximate solution y at discretization points
+    :return: Approximate solution y at discretization points, number of iteration k, array time
     """
     
     comm = MPI.COMM_WORLD
@@ -46,15 +46,18 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
         for i in local_indices:
             local_F_[i+1] = F([times[i], times[i + 1]], u[i])
         
-        # Gather the fine solver results from all processes
+        # Gather the fine solver results from all processes into process 0
         comm.Reduce(local_F_, F_, op=MPI.SUM, root=0)
         F_[0] = y0
         
+        # Update the solution 
         if rank == 0:
             G_prev = G_.copy()
             for i in range(N):
                 G_[i+1] = G([times[i], times[i + 1]], u[i])
                 u[i+1] = G_[i+1] + F_[i+1] - G_prev[i+1]
+        
+        # Share updated solution to all process for nexr iteration
         u = comm.bcast(u, root=0)
         
         # Check the stopping criterion

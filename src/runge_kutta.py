@@ -1,22 +1,48 @@
 import numpy as np
 
 def rungekutta2(odefun, tspan, y0, Nh, *args):
-    
-    h = (tspan[1] - tspan[0]) / Nh  # Taille de chaque intervalle
-    t = np.linspace(tspan[0], tspan[1], Nh+1)  # Points de temps
-    u = np.zeros((Nh+1, len(y0)))  # Initialisation du tableau de solutions
-    u[0, :] = y0  # Définir la condition initiale
+    """
+    Solve differentiel equation using runge_kutta2 method.
+
+    Params :
+    - odefun : differentiel equation
+    - tspan : time interval
+    - y0 : initial condition
+    - Nh : number of step size
+    - *args : Arguments of odefun
+
+    Return :
+    - t : array of time
+    - u : Solution of the differentiel equation at each t
+    """
+    h = (tspan[1] - tspan[0]) / Nh 
+    t = np.linspace(tspan[0], tspan[1], Nh+1) 
+    u = np.zeros((Nh+1, len(y0)))
+    u[0, :] = y0 
     
     for i in range(Nh):
         u[i+1, :] = u[i, :] + h * odefun(t[i] + h / 2., u[i, :] + odefun(t[i], u[i, :], *args) * h / 2., *args)
     return t,u
 
 def rungekutta4(odefun, tspan, y0, Nh, *args):
+    """
+    Solve differentiel equation using runge_kutta4 method.
 
-    h = (tspan[1] - tspan[0]) / Nh  # Taille de chaque intervalle
-    t = np.linspace(tspan[0], tspan[1], Nh+1)  # Points de temps
-    u = np.zeros((Nh+1, len(y0)))  # Initialisation du tableau de solutions
-    u[0, :] = y0  # Définir la condition initiale
+    Params :
+    - odefun : differentiel equation
+    - tspan : time interval
+    - y0 : initial condition
+    - Nh : number of step size
+    - *args : Arguments of odefun
+
+    Return :
+    - t : array of time
+    - u : Solution of the differentiel equation at each t
+    """
+    h = (tspan[1] - tspan[0]) / Nh 
+    t = np.linspace(tspan[0], tspan[1], Nh+1) 
+    u = np.zeros((Nh+1, len(y0))) 
+    u[0, :] = y0 
 
     for i in range(Nh):
         k1 = odefun(t[i], u[i, :], *args)
@@ -28,7 +54,21 @@ def rungekutta4(odefun, tspan, y0, Nh, *args):
     return t, u
 
 def adaptive_rungekutta4(odefun, tspan, y0, hmax , tol = 1e-2, *args):
-    
+    """
+    Solve differentiel equation using adaptive_rungekutta4 method.
+
+    Params :
+    - odefun : differentiel equation
+    - tspan : time interval
+    - y0 : initial condition
+    - hmax : the maximum value of the step size
+    - tol: tolerance
+    - *args : Arguments of odefun
+
+    Return :
+    - t : array of time
+    - u : Solution of the differentiel equation at each t
+    """
     def rk4(f, t, y, h):
         k1 = f(t, y, *args)
         k2 = odefun(t + h / 2., y + k1 * h / 2., *args)

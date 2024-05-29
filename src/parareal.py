@@ -2,19 +2,20 @@ import numpy as np
 
 def parareal(G, F, tspan, y0, N, K, tol = 0.5):
     """
-    Algorithme Parareal pour résoudre un système d'équations différentielles.
+    Parareal Algorithme  for solving differential equations.
 
     :param T: array of time (start time, end time)
-    :param N: Nombre de sous-intervalles
-    :param G: Fonction grossière
-    :param F: Fonction fine
-    :param y0: Condition initiale
-    :param K: Nombre d'itérations Parareal
-    :return: t, nombre d'iterations, Solution approximative y aux points de discrétisation
+    :param N: Number of sub interval
+    :param G: Coarse Function
+    :param F: Fine Function
+    :param y0: initial Condition 
+    :param K: Maximum number of parareal iteration
+    :return: t, number of iterations, Approximate solution y at discretization points
     """
     
     times = np.linspace(tspan[0], tspan[1], N + 1)
     
+    # Zeros iteration
     u = [y0]
     for i in range(N):
         u.append(G([times[i], times[i + 1]], u[i]))
@@ -25,12 +26,15 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
     F_[0] = y0
     
     for iter in range(K):
+        # Copy the previous Solution U and Coarse propagation for parareal correction
         u_prev = u.copy()
         G_prev = G_.copy()
         
+        # Fine propagation
         for i in range(N):
             F_[i+1] = F([times[i], times[i + 1]], u[i])
-            
+        
+        # Coarse propagation and update the solution
         for i in range(N):
             G_[i+1] = G([times[i], times[i + 1]], u[i])
             u[i+1] = G_[i+1] + F_[i+1] - G_prev[i+1]
