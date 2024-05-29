@@ -19,10 +19,7 @@ Narimane ZAOUACHE}
     time-consuming, especially for long simulations or comple­x systems. 
     The Parareal algorithm \cite{lions2001resolution} offe­rs an efficient parallel solution to acce­lerate PDE solving.
 
-    In this project, we aim to implement the Parareal algorithm in feel++ framework in parallel and in C++. 
-    By integrating the Parareal algorithm with Feel++, 
-    we can leverage the advanced numerical methods and parallel computing 
-     capabilities of both frameworks to tackle challenging time-dependent PDE problems.
+    In this project, our goal is to implement the Parareal algorithm both sequentially and in parallel on a chaotic mathematical model, specifically the Lorenz system. We aim to compare its performance with other advanced numerical methods. This comparison will focus on various criteria, including the accuracy of results, computational efficiency, and the ability to handle the sensitivity to initial conditions characteristic of chaotic systems. By using the Lorenz system, we can assess the robustness and speed of the Parareal algorithm in a context where small initial variations can lead to significant divergences in predictions, thereby highlighting the strengths and limitations of each method studied.
     \end{abstract}
 
 \section{Introduction}
@@ -31,19 +28,15 @@ Narimane ZAOUACHE}
     focuses on the study and implementation of the Parareal algorithm, a parallel method for temporal discretization. 
 
 
-    The primary objective of this project is to investigate the Parareal algorithm and its application in solving partial differential equations (PDEs) using the Cemosis Feel++ framework. 
+    The primary objective of this project is to investigate the Parareal algorithm and its application in solving partial differential equations (PDEs). 
     
 
-    The project is divided into four sub-objectives. 
+    The project is divided into two sub-objectives. 
     The first one is to implement the Parareal algorithm sequentially in Python for the Lorenz model, 
     a set of nonlinear ordinary differential equations. 
     The second is to implement the Parareal algorithm in parallel in Python for the same Lorenz model. 
-    The third is to implement the Parareal algorithm sequentially in Python for the heat equation using the Feel++ framework. 
-    Finally, the fourth one is to implement the Parareal algorithm in parallel in Python for the heat equation using the Feel++ framework.
 
-
-    Throughout this project, we will utilize Python as the programming language and the Feel++ framework, 
-    which provides a powerful tool for solving PDEs. 
+    Throughout this project, we will utilize Python as the programming language. 
     By exploring the Parareal algorithm and its implementation in different configurations, 
     we aim to demonstrate its potential in accelerating the solution of PDEs and its applicability to large-scale simulations.
     \section{Methodology}

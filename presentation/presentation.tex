@@ -79,19 +79,72 @@
 %----------------------------------------------------------------------------------------
 %	PRESENTATION BODY SLIDES
 %----------------------------------------------------------------------------------------
+\section{Context and objectives}
 
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Context and Objectives}
+	\myheading{Context}
+          The primary objective of this project is to study the Parareal algorithm and its application in solving time-dependent ordinary differential equations (ODEs). Additionally, the project examines commonly used numerical methods for solving the Lorenz system, including Euler’s method, the Runge-Kutta method, and the scipy.integrate functions.
+
+	\myheading{Objectives}
+
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{itemize}
+                   \item study lorenz system and Implement Lorenz Model.
+                   \item study the scipy.integrate package for ODEs solving and test it on lorenz system
+                   \item study the Parareal algorithm and implement it in sequential
+                   \item  study the parallelisation mechanism of the Parareal algorithm and implement it
+               \end{itemize}
+		\end{column}
+
+	\end{columns}
+
+\end{frame}
+
+%------------------------------------------------
+\section{The Lorenz system}
+
+%------------------------------------------------
+\begin{frame}
+    \frametitle{The Lorenz system}
+    The Lorenz system[3], introduced by meteorologist Edward Lorenz in 1963, is a set of nonlinear ordinary differential equations describing the behavior of a dynamic system.
+
+ The Lorenz system it can be described by the following three equations:
+        \begin{figure}
+                \includegraphics[width=1.\linewidth]{lorenz.png}
+            \end{figure}
+ 
+\end{frame}
+
+%------------------------------------------------
+\section{ODEs solvers}
+
+%------------------------------------------------
+\begin{frame}
+    \frametitle{ODEs solvers}
+	\myheading{Euler Methods} 
+           Euler methods are numerical techniques to approximate solutions of ordinary differential equations. There are two main variants: the explicit Euler method and the implicit Euler method.
+           
+        \myheading{Runge-Kutta Method}
+        The Runge-Kutta method is a family of numerical techniques for approximating ODE solutions, more accurate and versatile than Euler methods, and widely used in scientific computing.
+        
+        \myheading{SciPy.integrate Package}
+        The scipy.integrate package in SciPy offers odeint and $solve_ivp$ functions for solving ODEs. While odeint is fast and simple but offers limited control, $solve_ivp$ provides more flexibility, supporting various integration methods and event handling.
+\end{frame}
+
+%------------------------------------------------
 
 \section{Parareal algorithm}
 
 %------------------------------------------------
 \begin{frame}
     \frametitle{Parareal algorithm}
-    Parareal is a parallel algorithm from numerical analysis and used for
-    the solution of initial value problems\cite{lions2001resolution}.
-    Was introduced in 2001 by Lions, Maday and Turinici.
+    The Parareal algorithm, introduced by Lions, Maday, and Turinici in 2001, is a parallel-in-time integration method for solving large-scale time-dependent differential equations.
     \vspace{\baselineskip}
     It works by dividing the time interval of interest into smaller subintervals and
-    solving them concurrently using both coarse and fine solvers.
+    solving them concurrently using:
     \begin{columns}[c]
         \begin{column}{0.45\textwidth}
             \begin{itemize}
@@ -107,37 +160,56 @@
     \end{columns}
     These solutions are then iteratively corrected and synchronized to produce an accurate overall solution.
 \end{frame}
-
+%------------------------------------------------
+   \begin{frame}
+   \myheading{Parallelization}  
+    The Parareal algorithm can be parallelized through domain decomposition, where the time domain is divided into subdomains assigned to different processors for the Parallel Fine Solver Application. Another approach involves utilizing dedicated frameworks for parallelization, such as Message Passing (for synchronizing computations and exchanging information between processors) and shared-memory or distributed-memory parallelism, like MPI or OpenCL.
+   \end{frame}
 %------------------------------------------------
 
-\section{Context and objectives}
+\section{Numerical results}
 
 %------------------------------------------------
 \begin{frame}
-	\frametitle{Context and Objectives}
-	\myheading{Context}
-
-
-	the development of the parareal algorithm in feel++ in parallel and in C++.
-
-	\myheading{Objectives}
-
-	\begin{columns}[c]
-		\begin{column}{\textwidth}
-			\begin{itemize}
-				\item Study parareal algorithm.
-				\item Study a parallel version of parareal algorithm.
-				\item Use Lorenz System\cite{lorenz1963deterministic} as test case.
-				\item Compare different ode solvers and parareal.
-				\item Implement parallel version of parareal algorithm.
-				\item Study the possibility of use parareal with feel++.
-				\item Implement use of parareal with feel++ (if applicable).
-			\end{itemize}
-		\end{column}
-
-	\end{columns}
+	\frametitle{ Numerical results}
+	\myheading{Lorenz chaotic phenomena: Sensitive dependence on the initial condition}
+            \begin{column}{0.5\textwidth}
+              \begin{figure}
+                \includegraphics[width=1.\linewidth]{Lorenz_chaotic.png}
+              \end{figure}
+            \end{column} 
 
 \end{frame}
+%------------------------------------------------
+   \begin{frame}
+   \myheading{ Convergence check for Parareal algorithm on lorenz system}
+            \begin{column}{0.5\textwidth}
+              \begin{figure}
+                \includegraphics[width=1.\linewidth]{Convergence.png}
+              \end{figure}  
+            \end{column} 
+   \end{frame}
+%------------------------------------------------
+   \begin{frame}
+   \myheading{ Parareal performance comparison by the number of process}
+            \begin{column}{0.5\textwidth}
+              \begin{figure}
+                \includegraphics[width=1.\linewidth]{Parareal_perfo.png}
+              \end{figure}  
+            \end{column} 
+   \end{frame}
+%------------------------------------------------
+
+\section{Conclusion}
+
+%------------------------------------------------
+\begin{frame}
+	\frametitle{ onclusion}
+	The ODE-solving methods discussed have unique strengths and weaknesses. While Euler, Runge-Kutta, odeint, and solve_ivp are sequential approaches suitable for many problems, the Parareal algorithm offers faster computation through parallelization, especially for precise solutions over extended time periods. Method selection depends on precision, computation speed, and implementation complexity. Future exploration could integrate Parareal's parallel computing advantage with the feel++ framework for solving PDEs.
+
+
+\end{frame}
+
 
 %------------------------------------------------
 
@@ -152,8 +224,6 @@
 				\item Study parareal algorithm and Implement initial version of parareal in sequential.
 				\item Compare different ode solvers and parareal on Lorenz system.
 				\item Study and Implement a parallel version of parareal algorithm.
-				\item Study the possibility of use parareal with feel++.
-				\item Implement use of parareal with feel++ (if applicable).
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -165,6 +235,7 @@
 		\includegraphics[width=.90\linewidth]{roadmap.jpg}
 	\end{figure}
 \end{frame}
+
 
 %------------------------------------------------
 
