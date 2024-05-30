@@ -30,7 +30,7 @@ for i in range(4):
     
     ax = fig.add_subplot(221 + i,projection='3d')
     ax.plot(sol[:,0], sol[:,1], sol[:,2], lw=0.5)
-    ax.set_title('Default View')
+    ax.set_title('rho = %f' %rho)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
