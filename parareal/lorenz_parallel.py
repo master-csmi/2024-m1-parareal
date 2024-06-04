@@ -1,7 +1,7 @@
-from mpi_parareal import *
-from lorenz import *
-from euler import *
-from plot import *
+from parareal.mpi_parareal import *
+from lorenz.lorenz import *
+from ode.euler import *
+from plot.plot3d import *
 import time
 from mpi4py import MPI
 

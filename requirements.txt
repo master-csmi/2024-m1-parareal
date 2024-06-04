@@ -5,5 +5,14 @@ matplotlib
 plotly
 ipython
 ipykernel
-nbformat
+pyvista
+xvfbwrapper
+pythreejs
+requests
+pandas
+tabulate
+nbformat>=4.2.0
+setuptools 
+wheel
+build
 mpi4py

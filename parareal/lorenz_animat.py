@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
 
-from lorenz import *
-from euler import *
-from plot import *
+from lorenz.lorenz import lorenz
+from solver.feuler import feuler
+from plot.plot3d import plot3d
 
 #initial conditions
 u0_1 = np.array([1.,1.,1.])
