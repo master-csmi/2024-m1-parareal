@@ -200,27 +200,31 @@ y_{n+1} = y_n + h f(t_n, y_n).
 
 This formula is derived from the Taylor series expansion and provides a first-order accurate approximation. It is called "explicit" because it explicitly computes the next value \(y_{n+1}\) using the current value \(y_n\).
 
+To estimate the error we expand the exact solution $y(t)$ at the point $t_n$:
+$$
+y(t) = y(t_n) + f(t_n, y(t_n))(t - t_n) + O((t - t_n)^2).
+$$
+
+Putting $t = t_{n+1} = t_n + h$, we find
+$$
+y(t_n + h) = y(t_n) + f(t_n, y(t_n))h + O(h^2).$$
+With subtract the two equations to find:
+$$
+e_{n+1} = e_n[1 + f_y(t_n, \eta_n)h] + O(h^2)
+$$
+We see that the factor $[1 + h f_y]$ multiplies the error en This factor
+is the amplification (magnifcation) factor of the Euler method. 
+
 The stability of the explicit Euler method depends on the step size \(h\) and the properties of the function \(f(t, y)\).
 
-For a simple linear test equation of the form:
-
-\[
-\frac{dy}{dt} = \lambda y,
-\]
-
-where \(\lambda\) is a constant, the explicit Euler update rule becomes:
-
-\[
-y_{n+1} = y_n + h \lambda y_n = (1 + h \lambda) y_n.
-\]
-
-The method is stable if the magnitude of the factor \(1 + h \lambda\) is less than or equal to 1. This implies:
-
-\[
-|1 + h \lambda| \leq 1.
-\]
-
-For \(\lambda\) with a negative real part, this condition requires the step size \(h\) to be very small. If \(h\) is too large, the method can become unstable, leading to exponentially growing errors.
+The method is stable if the amplication factor is less than or equal to 1 in absolute value. 
+$$|1 + hf_y| \leq 1$$
+The interval of stability for Euler’s method is:
+$$ -2 \leq h f_y \leq 0$$
+Thus for Euler’s method to be stable we must have:
+$$
+h \leq \frac{2}{|f_y|}
+$$
 
 \subsubsection{Implicit (Backward) Euler Method}
 The implicit or backward Euler method is another technique for solving ODEs, and it is particularly useful for stiff equations. The method is given by:
@@ -231,25 +235,27 @@ y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}),
 
 where \(y_{n+1}\) is implicitly defined. This means that \(y_{n+1}\) appears on both sides of the equation, making it necessary to solve an equation to find \(y_{n+1}\). This method is generally more stable than the explicit Euler method.
 
-For the same test equation, the implicit Euler update rule becomes:
-
-\[
-y_{n+1} = y_n + h \lambda y_{n+1}.
-\]
-
-Rearranging gives:
-
-\[
-y_{n+1} = \frac{y_n}{1 - h \lambda}.
-\]
-
-The method is stable if the magnitude of the factor \( \frac{1}{1 - h \lambda} \) is less than or equal to 1. This implies:
-
-\[
-\left| \frac{1}{1 - h \lambda} \right| \leq 1.
-\]
-
-For \(\lambda\) with a negative real part, this condition is satisfied for any step size \(h > 0\). Therefore, the implicit Euler method is unconditionally stable for linear problems with \(\lambda\) having a negative real part. This makes it particularly suitable for stiff problems, where large step sizes can be used without losing stability.
+To estimate the error $e_{n+1}$ in terms of en, we expand the exact solution at the point $t_{n+1=}$:
+$$
+y(t) = y(t_{n+1}) + f(t_{n+1}, y(t_{n+1}))(t - t_{n+1}) + O((t - t_{n+1})^2
+).$$
+Now set $t = t_n = t_{n+1} - h$, to deduce
+$$
+y(t_n) = y(t_{n+1}) - hf(t_{n+1}, y(t_{n+1})) + O(h^2),
+$$
+whence
+$$
+y(t_{n+1}) = y(t_n) + hf(t_{n+1}, y(t_{n+1})) + O(h^2).$$
+Now we subtract to find:
+$$
+e_{n+1} = e_n + h f_y(t_{n+1}, \eta_n)e_{n+1} + O(h^2).
+$$
+When we solve for $e_{n+1}$ we find:
+$$
+e_{n+1} = \left(\frac{1}{1 - h f_y} \right)e_n + O(h^2).$$
+It follows that if the equation is stable, i.e., $f_y \leq 0$, the amplification factor:
+$$0 \leq \frac{1}{1 - hf_y} \leq 1$$ 
+Thus the backward Euler method is stable whenever the ODE is stable.
 
 \subsubsection*{Comparison}
 
@@ -567,12 +573,21 @@ Our observations indicated that the choice of solvers significantly influenced t
 % --------------------------------------------------------------
 \newpage
 \section{Conclusion}
+Each method of solving ODEs discussed in this report has unique strengths, weaknesses, and applications depending on different scenarios.
 
-Each ODE-solving method discussed in this report possesses unique strengths, weaknesses, and applicability in different scenarios. Methods such as Euler, Runge-Kutta, odeint, and \texttt{solve\_ivp} are sequential approaches suitable for a wide range of problems.\\
+However, the Parareal algorithm stands out for its ability to reduce computation time through parallel computing, making it particularly attractive for problems requiring high precision over extended time intervals.\\
 
-However, the Parareal algorithm stands out due to its capability to reduce computation time through parallel computing, making it particularly appealing for problems necessitating high precision over extended time intervals. The selection of the method should be guided by the specific requirements regarding precision, computational speed, and implementation complexity of the problem at hand.\\
 
-Furthermore, there's potential for deeper exploration by leveraging the advantages of parallel computing offered by Parareal and integrating it with frameworks like feel++ for solving PDEs in the future. This integration could enhance efficiency and scalability in tackling complex problems in various scientific and engineering domains
+\textbf{Project Achievements:}
+\begin{enumerate}
+    \item \textbf{Study and Implementation of Classical ODE Methods:} We studied and implemented various ODE solving methods, such as the Euler method, the Runge-Kutta method, and the scipy.integrate functions, testing their performance on the Lorenz system.
+    \item \textbf{Exploration of the scipy.integrate Package:} We explored and tested the scipy.integrate package for solving ODEs, particularly on the Lorenz system, which validated the effectiveness of these methods in different scenarios.
+    \item \textbf{Implementation of the Parareal Algorithm:} We not only studied the Parareal algorithm but also implemented it sequentially and in parallel, demonstrating its potential to accelerate ODE solving.
+    \item \textbf{Optimization through Parallelization:} By studying the parallelization mechanism of the Parareal algorithm, we observed a significant reduction in processing time as the number of processes increased, indicating improved efficiency.
+    \item \textbf{Convergence Tests and Solver Choice:} We conducted thorough tests to evaluate the influence of solver choice on the convergence order of the Parareal algorithm, finding that using the RK23 and RK45 methods provided higher convergence orders compared to implicit Euler methods.
+\end{enumerate}\\
+
+Consequently, this project not only validated the efficiency of the Parareal algorithm in rapidly solving ODEs but also highlighted its potential advantages for large-scale simulations and complex problems in engineering and science. In the future, there is potential for further exploration by leveraging the benefits offered by the Parareal algorithm's parallel computing capabilities and integrating it with frameworks like feel++ to solve PDEs, which could enhance efficiency and scalability in various scientific and technical fields.
 
 \newpage
 % --- Biblio par .bib
