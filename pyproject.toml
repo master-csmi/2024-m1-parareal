@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parareal"
+version = "1.0.0"
+description = "parareal algorithm"
+readme = "README.md"
+
+
+[[project.authors]]
+name = "Oussama BOUHENNICHE"
+email = "oussamabouhenniche14@gmail.com"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+
+[tool.setuptools]
+packages = ["parareal", "parareal.lorenz", "parareal.parareal", "parareal.plot", "parareal.solver"]

@@ -1,29 +1,27 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python package
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9"]
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: ${{ matrix.python-version }}
+    
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -33,7 +31,12 @@ jobs:
           python3-dev
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    
+    - name: Run MPI tests
+      run: |
+        mpiexec -n 2 pytest tests/test_mpi_parareal.py
+    
     - name: Test with pytest
       run: |
-        pip install pytest pytest-cov
         pytest
+    

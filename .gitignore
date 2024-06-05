@@ -304,4 +304,6 @@ TSWLatexianTemp*
 #*Notes.bib
 
 *.venv/*
+build/*
+*.egg-info/*
 __pycache__/

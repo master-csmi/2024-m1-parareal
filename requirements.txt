@@ -1,9 +1,14 @@
 scipy
 numpy
-sympy
 matplotlib
 plotly
 ipython
 ipykernel
-nbformat
+nbformat>=4.2.0
 mpi4py
+requests
+pytest
+setuptools 
+wheel
+build
+.
