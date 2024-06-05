@@ -35,3 +35,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Run MPI tests
+      run: |
+        mpiexec -n 2 pytest tests/test_mpi_parareal.py
