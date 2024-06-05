@@ -466,31 +466,16 @@ Our implementation was done in Python, utilizing libraries like NumPy for numeri
 
 \subsection{Project Structure}
 The project is available on  \href{https://github.com/master-csmi/2024-m1-parareal}{github} and is structured as shown in the picture below \reff{fig:7}:
+\newpage
+
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/code_struct.jpg}
+    \includegraphics[width=1\textwidth]{img/carbon (1).png}
     \caption{Code structure}
     \label{fig:7}
 \end{figure}
 \newline
 
-\begin{itemize}
-    \item \textbf{Lorenz\_model.ipynb:} contains a testing solution of lorenz system solved by our ODEs solvers and some testing scenarios of parareal.
-    \item \textbf{Test.ipynb} contains a testing solution of our tests functions solved by our ODEs solvers and parareal.
-    \item \textbf{euler.py:} contains the implementation of euler methods ( cours tan \cite{CoursTan}).
-    \item \textbf{lorenz.py:} contains the differentail equation sytem of lorenz
-    \item \textbf{lorenz\_animat.py:} contains 
-    \item \textbf{lorenz\_example\_rho.py:} contains a testing solutions of the Lorenz system for different values of rho.
-    \item \textbf{lorenz\_parallel.py:} contains a testing solution of lorenz system solved by parareal algorithm in parallel.
-    \item \textbf{mpi\_parareal.py:} contains the implementation of parareal algorithm in parallel.
-    \item \textbf{odre\_converge.py:} contains a testing of influence of Solver Choice on Parareal Convergence Order.
-    \item \textbf{parareal.py:} contains the implementation of parareal algorithm in sequential.
-    \item \textbf{plot.py:} contains a plot function for 3d plot.
-    \item \textbf{runge\_kutta.py:} contains the implementation runge kutta methods (rk4, rk2, and adaptative time stepping rk4).
-    \item \textbf{test\_func.py:} contains a simple function for testing our algorithms.
-\end{itemize}
-
-\newpage
 \section{Tests and Results}
 In this section, we will present the results of executing and testing our solution
 \subsection{Lorenz chaotic phenomena: Sensitive dependence on the initial condition}
