@@ -1,9 +1,10 @@
-from parareal.mpi_parareal import *
-from lorenz.lorenz import *
-from ode.euler import *
-from plot.plot3d import *
-import time
+from parareal.parareal.mpi_parareal import parareal
+from parareal.lorenz.lorenz import lorenz
+from parareal.solver.feuler import feuler
+from parareal.plot.plot3d import plot3d
 from mpi4py import MPI
+import numpy as np
+import time
 
 
 # Model parameters

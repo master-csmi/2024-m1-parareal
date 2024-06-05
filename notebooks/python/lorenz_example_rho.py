@@ -1,7 +1,7 @@
-from parareal.parareal import *
+from parareal.parareal.parareal import parareal
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
-from lorenz.lorenz import *
+from parareal.lorenz.lorenz import *
 
 # solutions of the Lorenz system for different values of rho
 # Parameters
