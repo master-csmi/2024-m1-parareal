@@ -27,6 +27,20 @@ To get started with this project, clone the repository and install the required 
 1. Clone the repo
    ```sh
    git clone https://github.com/master-csmi/2024-m1-parareal.git
+2. Installation des paquets python requis
+
+   Pour utiliser les programmes du cours et executer les notebooks jupyter
+   , veuillez suivre la procédure suivante:
+
+   ```sh
+   python3 -m venv .venv # <1>
+   source .venv/bin/activate # <2>
+   pip3 install -r requirements.txt # <3>
+   ```
+
+   1. Creation d'un environnement virtuel python `.venv`
+   2. Activation de l'environnement virtuel `.venv`
+   3. Installation des paquets python requis
 
 ## Contributors
 - <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
