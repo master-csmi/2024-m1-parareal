@@ -6,6 +6,7 @@ ipython
 ipykernel
 nbformat>=4.2.0
 mpi4py
+requests
 pytest
 setuptools 
 wheel
