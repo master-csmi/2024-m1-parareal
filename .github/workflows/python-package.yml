@@ -32,9 +32,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Test with pytest
-      run: |
-        pytest
     - name: Run MPI tests
       run: |
         mpiexec -n 2 pytest tests/test_mpi_parareal.py
+    
+    - name: Test with pytest
+      run: |
+        pytest
+    
