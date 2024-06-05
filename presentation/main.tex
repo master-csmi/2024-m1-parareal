@@ -13,6 +13,9 @@
 \usepackage{wrapfig}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage[style=ieee]{biblatex}
+\addbibresource{ref.bib}
+
 % ADD YOUR PACKAGES BELOW
 
 %----------------------------------------------------------------------------------------
@@ -50,7 +53,7 @@
         \item Traditional methods can be highly time-consuming, especially for long simulations or intricate systems.
     \end{itemize}
 \begin{block}{}
-    The Parareal algorithm provides an efficient parallel solution to expedite the solving of ODEs and PDEs
+    The Parareal algorithm \footfullcite{lions2001resolution} provides an efficient parallel solution to expedite the solving of ODEs and PDEs
 \end{block}
 \end{frame}
 
@@ -58,8 +61,8 @@
 % Lists
 \begin{frame}{Objectives}
     \begin{enumerate}
-        \item Study lorenz system and Implement Lorenz Model, also study different ODEs solvers and its implementation.
-        \item Explore the scipy.integrate package for ODEs solving and test it on lorenz system.
+        \item Study lorenz system \footfullcite{lorenz1963deterministic} and Implement Lorenz Model, also study different ODEs solvers and its implementation.
+        \item Explore the scipy.integrate \footfullcite{SciPy} package for ODEs solving and test it on lorenz system.
         \item Study the Parareal algorithm and implement it in sequential.
         \item study the parallelisation mechanism of the Parareal algorithm and implement it.
     \end{enumerate}
@@ -71,6 +74,34 @@
 
 %------------------------------------------------
 \begin{frame}{Lorenz system and ODEs solvers}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+  \begin{center}
+\large
+\begin{cases}
+    \displaystyle\frac{dx}{dt} = \sigma(y - x) \\
+    \displaystyle\frac{dy}{dt} = x(\rho - z) - y \\
+    \displaystyle\frac{dz}{dt} = xy - \beta z
+\end{cases}
+  \end{center}\\
+   
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    where:
+\begin{itemize}
+    \item $x$ is the rate of convective overturning,
+    \item $y$ is the horizontal temperature variation,
+    \item $z$ is the vertical temperature variation,
+    \item $\sigma $ is the Prandtl number,
+    \item $\rho $ is the Rayleigh number,
+    \item $\beta $ is a geometrical factor.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Lorenz system and ODEs solvers}
+
     \begin{columns}
 \begin{column}{0.5\textwidth}
    \begin{figure}[ht!]
@@ -91,6 +122,7 @@
      \end{center}
 \end{column}
 \end{columns}
+    
 \end{frame}
 
 \begin{frame}{Parareal Algorithm}
@@ -218,13 +250,29 @@
 
 % Section divider frame
 \makesection{Conclusion}
+\begin{frame}{Conclusion}
+\textbf{Diverse ODE Methods:}
+\begin{itemize}
+    \item Implemented and tested Euler, Runge-Kutta, and scipy.integrate methods on the Lorenz system.
+\end{itemize}
+\textbf{Parareal Algorithm:}
+\begin{itemize}
+    \item Implemented sequentially and in parallel.
+    \item Significant reduction in computation time with increased processes.
+    \item Demonstrated high potential for large-scale simulations.
+\end{itemize}
+\textbf{Future Prospects:}
+\begin{itemize}
+    \item Further exploration with Parareal for PDEs using frameworks like feel++.
+\end{itemize}
+\end{frame}
 
 %------------------------------------------------
 % Refenrenced
 \begin{frame}[allowframebreaks]{References}
-    \nocite{*}
-    \bibliographystyle{ieeetr}
-	\small\bibliography{ref}
+    %\nocite{*}
+    \printbibliography
+	
 \end{frame}
 
 %----------------------------------------------------------------------------------------
