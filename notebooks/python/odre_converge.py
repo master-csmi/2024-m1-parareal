@@ -1,7 +1,7 @@
-from test_func import *
+from parareal.test_func import *
 from scipy.integrate import solve_ivp
-from parareal.mpi_parareal import *
-from ode.euler import *
+from parareal.parareal.mpi_parareal import *
+from parareal.solver.beuler import beuler
 import matplotlib.pyplot as plt
 from mpi4py import MPI
 # Model parameters
