@@ -41,6 +41,18 @@ To get started with this project, clone the repository and install the required 
    1. Creation d'un environnement virtuel python `.venv`
    2. Activation de l'environnement virtuel `.venv`
    3. Installation des paquets python requis
+   
+## Usage
+To execute MPI4py code in the terminal, you can follow these steps:
+
+1. Ensure that you have installed MPI on your system.
+
+2. Compile your MPI4py code using the following command:
+   ```sh
+   mpiexec -n <number_of_processes> python your_code.py
+   ```
+   Replace `<number_of_processes>` with the desired number of MPI processes you want to run.
+   Replace `your_code.py` with the source name code you want to run.
 
 ## Contributors
 - <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
