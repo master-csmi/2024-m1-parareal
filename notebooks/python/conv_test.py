@@ -5,24 +5,20 @@ from scipy.integrate import solve_ivp
 from parareal.solver.beuler import beuler
 from parareal.solver.feuler import feuler
 from parareal.solver.rk4 import rk4
+from parareal.solver.rk2 import rk2
 from parareal.lorenz.lorenz import lorenz
 from parareal.test_func import *
 from mpi4py import MPI
 
-def convergence_test(F,G,tspan,y0,Ns,max_iter, f_exacte):
-    Ns = np.array([1000,10000])
+def convergence_test(F,G,tspan,y0,Nh,max_iter, f_exacte):
+    Ns = np.array([10,100,1000])
     dts=[]
     errors = []
     
     for n in Ns:
-        t, _, sol1 = parareal(G, F, tspan, y0, n, max_iter,tol=1e-1)
-        y_exac =  f_exacte(tspan)[1]
-        t_exact = f_exacte(tspan)[0]
-        x_sol_exacte_interp = np.interp(t, t_exact, y_exac[:,0])
-        y_sol_exacte_interp = np.interp(t, t_exact, y_exac[:,1])
-        z_sol_exacte_interp = np.interp(t, t_exact, y_exac[:,2])
-        sol_exacte_interp= np.stack((x_sol_exacte_interp, y_sol_exacte_interp, z_sol_exacte_interp), axis=-1)
-        errors.append(np.linalg.norm(sol1 - sol_exacte_interp) / len(t))
+        t, _, sol1 = parareal(G, F, tspan, y0, n, max_iter,tol=1e-10)
+        sol_exacte =  f_exacte(t)
+        errors.append(np.linalg.norm(sol1 - sol_exacte) / len(t))
         dts.append(t[1]-t[0])
     
     errors = np.array(errors)
@@ -49,28 +45,48 @@ def convergence_test(F,G,tspan,y0,Ns,max_iter, f_exacte):
     return dts, errors, convergence_rates, order_of_convergence
 
 Nh = 100000
-tspan = [0, 4] 
-y0 = [2] 
-y0 = np.array([1.,1.,1.])
+tspan = [0, 10] 
+y0 = [1] 
 tol = 1e-1
 max_iter = 100
 G_Nh=1
 F_Nh=10
 
-# params
-tspan = np.array([0.,60.])
-sigma, rho, beta = 10, 28, 8/3
 
-lorenz_sys = lambda _, state :lorenz(_, state, sigma, rho, beta)
 
-G1 = lambda tspan,u0, :beuler(lorenz_sys, tspan, u0, G_Nh)[1][-1]
-F1 = lambda tspan,u0, :feuler(lorenz_sys, tspan, u0, F_Nh)[1][-1]
+G1 = lambda tspan,u0, :feuler(h, tspan, u0, G_Nh)[1][-1]
+F1 = lambda tspan,u0, :rk2(h, tspan, u0, F_Nh)[1][-1]
 
-G2 = lambda tspan,u0, :solve_ivp(lorenz_sys, tspan, u0, method='RK23').y[:, -1]
-F2 = lambda tspan,u0, :solve_ivp(lorenz_sys, tspan, u0, method='RK45').y[:, -1]
+G2 = lambda tspan,u0, :solve_ivp(h, tspan, u0, method='RK23').y[:, -1]
+F2 = lambda tspan,u0, :solve_ivp(h, tspan, u0, method='RK45').y[:, -1]
 
-f_exacte = lambda tspan: rk4(lorenz_sys, tspan, y0, Nh)
+#convergence_test(F1,G1,tspan,y0,Nh,max_iter, h_exacte)
+#convergence_test(F2,G2,tspan,y0,Nh,max_iter, h_exacte)
 
-convergence_test(F1,G1,tspan,y0,Nh,max_iter, f_exacte)
-convergence_test(F2,G2,tspan,y0,Nh,max_iter, f_exacte)
+# Model parameters
+sigma, rho, beta = 10.0, 28.0, 8/3
+U0 = np.array([5.0, -5.0, 20.0])
+tspan = [0, 1]
+lorenz_ = lambda t,state:lorenz(t, state, sigma, rho, beta)
+
+#Parareal params
+N = 180
+tol = 1e-10
+max_iter = 75
+G_Nh=1
+F_Nh=80
+G3 = lambda tspan,u0, :beuler(lorenz_, tspan, u0, G_Nh)[1][-1]
+F3 = lambda tspan,u0, :rk4(lorenz_, tspan, u0, F_Nh)[1][-1]
+
+t_reference,iteration, sol_reference = parareal(lambda tspan,u0, :rk4(lorenz_, tspan, u0, 1)[1][-1],lambda tspan,u0, :rk4(lorenz_, tspan, u0, 80)[1][-1], tspan, U0, 10000,max_iter,tol=1e-10 )
+def lorenz_ref(t):
+    # Interpolation de la solution de référence pour correspondre aux temps calculés
+    x = np.interp(t, t_reference, sol_reference[:,0])
+    y = np.interp(t, t_reference, sol_reference[:,1])
+    z = np.interp(t, t_reference, sol_reference[:,2])
+    return np.stack((x,y,z),axis=1)
+
+convergence_test(F3,G3,tspan,U0,Nh,max_iter, lorenz_ref)
+
+
 

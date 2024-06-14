@@ -12,7 +12,7 @@ def z_exacte(t):
     return 0.5 * np.exp(-t) + 0.5 * np.cos(t) + 0.5 * np.sin(t)
 
 def h(t, y): 
-    return -2 * y
+    return -1 * y
 
 def h_exacte(t):
-    return np.exp(-2 * t)
+    return np.exp(-1 * t)
