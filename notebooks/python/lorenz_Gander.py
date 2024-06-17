@@ -14,13 +14,13 @@ import matplotlib.pyplot as plt
 # Model parameters
 sigma, rho, beta = 10.0, 28.0, 8/3
 U0 = np.array([5.0, -5.0, 20.0])
-tspan = [0, 10]
+tspan = [0, 1]
 lorenz_ = lambda t,state:lorenz(t, state, sigma, rho, beta)
 
 #Parareal params
-N = 180
+N = 10
 tol = 1e-10
-max_iter = 75
+max_iter = 10
 G_Nh=1
 F_Nh=80
 G = lambda tspan,u0, :rk4(lorenz_, tspan, u0, G_Nh)[1][-1]
