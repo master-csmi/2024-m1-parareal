@@ -40,7 +40,7 @@ def parareal(G, F, tspan, y0, N, K, tol = 0.5):
             u[i+1] = G_[i+1] + F_[i+1] - G_prev[i+1]
 
         # Check the stopping criterion
-        error = np.linalg.norm(u - u_prev)/len(times)
+        error = np.linalg.norm(u - u_prev) / np.linalg.norm(u)
         print(f"Iteration {iter}, Error: {error}")
         if error < tol:
             break
