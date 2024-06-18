@@ -61,11 +61,11 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
         u = comm.bcast(u, root=0)
         
         # Check the stopping criterion
-        error = np.linalg.norm(u - u_prev)/len(times)
+        error = np.linalg.norm(u - u_prev) / np.linalg.norm(u)
         if rank == 0:
             print(f"Iteration {iter}, Error: {error}")
         if error < tol:
             break
         
     
-    return times, iter + 1, u
+    return times, iter + 1, np.array(u)
