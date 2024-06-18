@@ -2,31 +2,33 @@ from parareal.test_func import *
 from scipy.integrate import solve_ivp
 from parareal.parareal.mpi_parareal import *
 from parareal.solver.beuler import beuler
+from parareal.solver.rk4 import rk4
+from parareal.solver.rk2 import rk2
 import matplotlib.pyplot as plt
 from mpi4py import MPI
 # Model parameters
 
 
 Nh = 100000
-tspan = [0, 4] 
-y0 = [2] 
-tol = 1e-1
+tspan = [0, 1] 
+y0 = [0] 
+tol = 1e-10
 max_iter = 10
 G_Nh=1
-F_Nh=1
+F_Nh=10
 
-G1 = lambda tspan,u0, :beuler(f, tspan, u0, G_Nh)[1][-1]
-F1 = lambda tspan,u0, :beuler(f, tspan, u0, F_Nh)[1][-1]
+G1 = lambda tspan,u0, :beuler(z, tspan, u0, G_Nh)[1][-1]
+F1 = lambda tspan,u0, :rk2(z, tspan, u0, F_Nh)[1][-1]
 
-G2 = lambda tspan,u0, :solve_ivp(f, tspan, u0, method='RK23').y[:, -1]
-F2 = lambda tspan,u0, :solve_ivp(f, tspan, u0, method='RK45').y[:, -1]
+G2 = lambda tspan,u0, :solve_ivp(z, tspan, u0, method='RK23').y[:, -1]
+F2 = lambda tspan,u0, :solve_ivp(z, tspan, u0, method='RK45').y[:, -1]
 
 # Run Parareal
 #t_reference, iterations, sol_reference = parareal(G, F, tspan, y0, Nh, max_iter, tol)
 #dt_reference = t_reference[1]-t_reference[0]
 
 
-Ns = np.array([10,100,1000])
+Ns = np.arange(10, 101, 10)
 dts=[]
 errors1 = []
 errors2 = []
@@ -37,9 +39,9 @@ for n in Ns:
     dts .append(t[1]-t[0])
     # Interpolation de la solution de référence pour correspondre aux temps calculés
     #sol_reference_interp = np.interp(t, t_reference, sol_reference[:,0])
-    y_exac =  f_exacte(t)
-    errors1.append(np.linalg.norm(sol1[:,0] - y_exac) / len(t))
-    errors2.append(np.linalg.norm(sol2[:,0] - y_exac) / len(t))
+    y_exac =  z_exacte(t)
+    errors1.append(np.linalg.norm(sol1[:,0] - y_exac) / np.linalg.norm(y_exac))
+    errors2.append(np.linalg.norm(sol2[:,0] - y_exac) / np.linalg.norm(y_exac))
     
 
 if MPI.COMM_WORLD.Get_rank() == 0:
