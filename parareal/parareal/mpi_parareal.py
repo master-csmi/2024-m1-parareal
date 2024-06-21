@@ -1,7 +1,8 @@
-import numpy as np
 from mpi4py import MPI
+import numpy as np
+import time
 
-def parareal(G, F, tspan, y0, N, K, tol=0.5):
+def mpi_parareal(G, F, tspan, y0, N, K, tol=0.5):
     """
     Parareal algorithm to solve a system of differential equations.
 
@@ -14,7 +15,8 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
     :param tol: Tolerance for stopping criterion
     :return: Approximate solution y at discretization points, number of iteration k, array time
     """
-    
+    start_time = time.time()
+
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -35,6 +37,8 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
     
     F_ = np.zeros_like(u)
     F_[0] = y0
+
+    solutions = [u.copy()]
     
     for iter in range(K):
         u_prev = u.copy()
@@ -60,6 +64,8 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
         # Share updated solution to all process for nexr iteration
         u = comm.bcast(u, root=0)
         
+        solutions.append(u.copy())
+        
         # Check the stopping criterion
         error = np.linalg.norm(u - u_prev) / np.linalg.norm(u)
         if rank == 0:
@@ -67,5 +73,6 @@ def parareal(G, F, tspan, y0, N, K, tol=0.5):
         if error < tol:
             break
         
+    elapsed_time = time.time() - start_time
     
-    return times, iter + 1, np.array(u)
+    return times, iter + 1, np.array(solutions), elapsed_time
