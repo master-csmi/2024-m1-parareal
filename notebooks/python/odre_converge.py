@@ -34,8 +34,8 @@ errors1 = []
 errors2 = []
 
 for n in Ns:
-    t, iterations, sol1 = parareal(G1, F1, tspan, y0, n, max_iter, tol)
-    t, iterations, sol2 = parareal(G2, F2, tspan, y0, n, max_iter, tol)
+    t, iterations, sol1 = mpi_parareal(G1, F1, tspan, y0, n, max_iter, tol)
+    t, iterations, sol2 = mpi_parareal(G2, F2, tspan, y0, n, max_iter, tol)
     dts .append(t[1]-t[0])
     # Interpolation de la solution de référence pour correspondre aux temps calculés
     #sol_reference_interp = np.interp(t, t_reference, sol_reference[:,0])
