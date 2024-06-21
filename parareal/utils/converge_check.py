@@ -8,11 +8,12 @@ def convergence_check(G,F,Ns,tspan,y0,max_iter,tol,f_exacte):
     errors = []
 
     for n in Ns:
-        t, iterations, sol = parareal(G, F, tspan, y0, n, max_iter, tol)
+        t, iterations, sol, time = mpi_parareal(G, F, tspan, y0, n, max_iter, tol)
         dts .append(t[1]-t[0])
-        y_exac =  np.reshape(f_exacte(t),np.array(sol).shape)
-        errors.append(np.linalg.norm(sol - y_exac) / np.linalg.norm(y_exac))
+        y_exac =  np.reshape(f_exacte(t),np.array(sol[-1]).shape)
+        errors.append(np.linalg.norm(sol[-1] - y_exac) / np.linalg.norm(y_exac))
     
+    convergence_rates = order_of_convergence = None
     if MPI.COMM_WORLD.Get_rank() == 0:
         
         # Calculate convergence rates
