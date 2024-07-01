@@ -1,4 +1,4 @@
-from parareal.test_func import *
+from parareal.utils.test_func import *
 from scipy.integrate import solve_ivp
 from parareal.parareal.mpi_parareal import *
 from parareal.solver.beuler import beuler
