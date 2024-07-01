@@ -1,6 +1,6 @@
 from parareal.parareal.parareal import parareal
 from parareal.solver.feuler import feuler
-from parareal.test_func import *
+from parareal.utils.test_func import *
 
 def test_parareal():
     Nh = 100 
