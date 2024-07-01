@@ -3,7 +3,7 @@ from parareal.lorenz.lorenz import lorenz
 from parareal.solver.feuler import feuler
 from parareal.solver.beuler import beuler
 from parareal.solver.rk4 import rk4
-from parareal.plot.plot3d import plot3d
+from parareal.utils.plot3d import plot3d
 from mpi4py import MPI
 import numpy as np
 

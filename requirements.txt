@@ -2,6 +2,8 @@ scipy
 numpy
 matplotlib
 plotly
+seaborn
+pandas
 ipython
 ipykernel
 nbformat>=4.2.0
