@@ -21,7 +21,7 @@ email = "oussamabouhenniche14@gmail.com"
 
 [tool.black]
 line-length = 88
-target-version = ['py37', 'py38', 'py39', 'py310']
+target-version = ['py38', 'py310']
 
 [tool.isort]
 profile = "black"
