@@ -38,6 +38,9 @@ jobs:
           build-essential \
           libmpich-dev \
           python3-dev
+        mpichversion
+        which mpiexec
+        mpiexec --version
 
     - name: Install Python dependencies
       run: |
@@ -50,6 +53,7 @@ jobs:
 
     - name: Run MPI tests
       run: |
+        echo "Running MPI tests with Python ${{ matrix.python-version }}"
         timeout 5m mpiexec -n 2 python -m pytest tests/test_mpi_parareal.py
       env:
         MPIEXEC_TIMEOUT: 300
