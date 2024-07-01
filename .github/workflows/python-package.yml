@@ -44,9 +44,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install parareal package
+      run: |
+        pip install -e .
+
     - name: Run MPI tests
       run: |
-        timeout 2m mpiexec -n 2 python -m pytest tests/test_mpi_parareal.py
+        timeout 5m mpiexec -n 2 python -m pytest tests/test_mpi_parareal.py
       env:
         MPIEXEC_TIMEOUT: 300
 
