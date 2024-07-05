@@ -50,8 +50,8 @@ t, iterations, solutions, parareal_time = mpi_parareal(G, F, tspan, U0, N, max_i
 
 if MPI.COMM_WORLD.Get_rank() == 0 :
     # Print the execution time
-    print(f"Execution Time: {parareal_time} seconds")
+    print(f"np={MPI.COMM_WORLD.Get_size()},coarse solver={G_solver_name},fine solver={F_solver_name}, Execution Time: {parareal_time} seconds")
 
     # Save the time to a file
-    with open("execution_times.txt", "a") as f:
+    with open(f"execution-times-{MPI.COMM_WORLD.Get_size()}-{G_solver_name}-{F_solver_name}.txt", "a") as f:
         f.write(f"{MPI.COMM_WORLD.Get_size()},{G_solver_name},{F_solver_name},{parareal_time}\n")
