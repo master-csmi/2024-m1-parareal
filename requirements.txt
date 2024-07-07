@@ -2,13 +2,16 @@ scipy
 numpy
 matplotlib
 plotly
+seaborn
+pandas
 ipython
 ipykernel
 nbformat>=4.2.0
 mpi4py
 requests
 pytest
-setuptools 
+setuptools
+scikit-learn 
 wheel
 build
 .
