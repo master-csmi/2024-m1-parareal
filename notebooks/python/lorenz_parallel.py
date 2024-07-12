@@ -15,11 +15,11 @@ import sys
 # Model parameters
 sigma, rho, beta = 10.0, 28.0, 8/3
 U0 = np.array([5, -5, 20])
-tspan = [0., 5.]
+tspan = [0., 10.]
 lorenz_ = lambda t, state: lorenz(t, state, sigma, rho, beta)
 
 # Parareal params
-N = 500
+N = 1000
 tol = 1e-10
 max_iter = 100
 G_Nh = 1
