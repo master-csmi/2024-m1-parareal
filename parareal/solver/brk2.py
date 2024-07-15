@@ -3,15 +3,20 @@ from scipy.optimize import fsolve
 
 def brk2(f, tspan, y0, Nh, *args):
     """
-    Implémentation de la méthode de Runge-Kutta implicite d'ordre 2 (Gauss-Legendre).
+    Implementation of the seconde-order implicit Runge-Kutta Gauss-Legendre method.
 
-    :param f: fonction définissant l'équation différentielle dy/dt = f(t, y)
-    :param y0: condition initiale
-    :param t0: temps initial
-    :param tf: temps final
-    :param args: pas de temps
-    :return: tableau des temps et des solutions
+    Params :
+    - f: Function defining the differential equation dy/dt = f(t, y)
+    - tspan: Tuple containing the initial and final time (t0, tf)
+    - y0: Initial condition as an array
+    - Nh: Number of time intervals
+    - *args: Additional arguments for the function f
+
+    Return :
+    - t : array of time
+    - u : Solution of the differentiel equation at each t
     """
+    
     def phi(y_guess, yi, ti, h):
         return y_guess - yi - h * f(ti + h / 2, (yi + y_guess) / 2, *args)
 
