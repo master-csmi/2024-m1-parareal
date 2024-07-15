@@ -60,7 +60,7 @@ jobs:
 
     - name: Run standard tests
       run: |
-        pytest
+        pytest ./tests
 
     - name: Generate coverage report
       run: |

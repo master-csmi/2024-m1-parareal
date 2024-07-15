@@ -15,13 +15,18 @@ import sys
 # Model parameters
 sigma, rho, beta = 10.0, 28.0, 8/3
 U0 = np.array([5, -5, 20])
-tspan = [0., 5.]
+tspan = [0., 10.]
 lorenz_ = lambda t, state: lorenz(t, state, sigma, rho, beta)
 
-# Parareal params
-N = 500
+# Parareal params:
+# N: Number of sub-intervals
+# max_iter: Number of Parareal iterations
+# tol: Tolerance for stopping criterion
+N = 1000
 tol = 1e-10
 max_iter = 100
+
+# Coarse and fine solvers Number of sub-intervals
 G_Nh = 1
 F_Nh = 80
 
@@ -53,5 +58,5 @@ if MPI.COMM_WORLD.Get_rank() == 0 :
     print(f"np={MPI.COMM_WORLD.Get_size()},coarse solver={G_solver_name},fine solver={F_solver_name}, Execution Time: {parareal_time} seconds")
 
     # Save the time to a file
-    with open(f"execution-times-{MPI.COMM_WORLD.Get_size()}-{G_solver_name}-{F_solver_name}.txt", "a") as f:
+    with open(f"data-{MPI.COMM_WORLD.Get_size()}-{G_solver_name}-{F_solver_name}.txt", "a") as f:
         f.write(f"{MPI.COMM_WORLD.Get_size()},{G_solver_name},{F_solver_name},{parareal_time}\n")

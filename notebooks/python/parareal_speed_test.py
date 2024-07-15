@@ -6,7 +6,7 @@ from parareal.solver.rk2 import rk2
 from parareal.solver.brk2 import brk2
 from parareal.solver.rk4 import rk4
 from parareal.solver.brk4 import brk4
-from parareal.test_func import *
+from parareal.utils.test_func import *
 from mpi4py import MPI
 import numpy as np
 import time

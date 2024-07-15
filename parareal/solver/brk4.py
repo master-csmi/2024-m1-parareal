@@ -5,12 +5,16 @@ def brk4(f, tspan, y0, Nh, *args):
     """
     Implementation of the fourth-order implicit Runge-Kutta Gauss-Legendre method.
 
-    :param f: Function defining the differential equation dy/dt = f(t, y)
-    :param tspan: Tuple containing the initial and final time (t0, tf)
-    :param y0: Initial condition as an array
-    :param Nh: Number of time intervals
-    :param args: Additional arguments for the function f
-    :return: Tuple (times, y) where times is the array of time points and y is the array of solutions
+    Params :
+    - f: Function defining the differential equation dy/dt = f(t, y)
+    - tspan: Tuple containing the initial and final time (t0, tf)
+    - y0: Initial condition as an array
+    - Nh: Number of time intervals
+    - *args: Additional arguments for the function f
+
+    Return :
+    - t : array of time
+    - u : Solution of the differentiel equation at each t
     """
     h = (tspan[1] - tspan[0]) / Nh
     times = np.linspace(tspan[0], tspan[1], Nh + 1)
