@@ -1,7 +1,15 @@
 #!/bin/bash
 
-# Remove old execution times file if it exists
-rm -f execution_times.txt job_ids.txt
+# Get the current date and time
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+
+# Define the new execution times file with the timestamp
+output_dir="data"
+data_file="${output_dir}/data_speedup_${timestamp}.txt"
+job_ids_file="${output_dir}/job_ids_${timestamp}.txt"
+
+# Create the output directory if does not exist
+mkdir -p $output_dir
 
 # List of solvers
 solvers=("explicit_euler" "implicit_euler" "explicit_rk2" "implicit_rk2" "explicit_rk4" "implicit_rk4")
@@ -40,7 +48,7 @@ EOF
 
             # Submit the job and record the job ID
             job_id=$(sbatch parareal-$G_solver-$F_solver-$np.job | awk '{print $4}')
-            echo $job_id >> job_ids.txt
+            echo $job_id >> $job_ids_file
             wait_for_jobs
         done
     done
@@ -55,9 +63,9 @@ done
 for np in 1 2 4 8 16 32 64 128; do
     for G_solver in "${solvers[@]}"; do
         for F_solver in "${solvers[@]}"; do
-            if [[ -f execution-times-$np-$G_solver-$F_solver.txt ]]; then
-                cat execution-times-$np-$G_solver-$F_solver.txt >> execution_times.txt
-                rm execution-times-$np-$G_solver-$F_solver.txt
+            if [[ -f data-$np-$G_solver-$F_solver.txt ]]; then
+                cat data-$np-$G_solver-$F_solver.txt >> $data_file
+                rm data-$np-$G_solver-$F_solver.txt
             fi
         done
     done
