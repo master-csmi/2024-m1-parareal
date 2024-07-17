@@ -56,3 +56,43 @@ To execute MPI4py code in the terminal, you can follow these steps:
 ## Contributors
 - <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
 - <a href="https://github.com/zaouach" target="blank">Narimane ZAOUACHE</a>
+---
+# Internship Continuation
+## Internship Goals
+
+The internship aims to extend the initial project by implementing advanced features and performing detailed analyses.
+
+## Extended Roadmap
+
+1. Implement Implicit RK4 and RK2 solvers.
+2. Perform Parareal speedup analysis.
+3. Study the convergence order of the algorithm for different solver combinations.
+4. Study the number of Parareal iterations required for convergence for different solver combinations.
+
+## Usage
+Follow the same steps as outlined in the initial project section to run the code.
+
+## Contributors
+- <a href="https://github.com/oussama-floor9" target="blank">Oussama BOUHENNICHE</a>
+
+## Running Analyses using Shell Scripts
+
+1. Convergence Order Analysis:
+   ```sh
+   ./convergence_order_test.sh <number_of_mpi_processes>
+   ```
+   This script runs the convergence order analysis for different solver combinations.
+   Replace `<number_of_processes>` with the desired number of MPI processes.
+
+2. Parareal Iterations Analysis:
+   ```sh
+   ./nbr_iter_test.sh <number_of_mpi_processes>
+   ```
+   This script runs the analysis of Parareal iterations required for convergence for different solver combinations.
+   Replace `<number_of_processes>` with the desired number of MPI processes.
+
+3. Parareal Speedup Analysis:
+   ```sh
+   ./speedup_test.sh
+   ```
+   This script runs the Speedup analysis of Parareal for different solver combinations.
