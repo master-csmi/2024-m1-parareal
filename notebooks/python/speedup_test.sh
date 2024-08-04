@@ -6,7 +6,7 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 # Define the new execution times file with the timestamp
 output_dir="data"
 data_file="${output_dir}/data_speedup_${timestamp}.txt"
-job_ids_file="${output_dir}/job_ids_${timestamp}.txt"
+job_ids_file="${output_dir}/job_ids_speedup_${timestamp}.txt"
 
 # Create the output directory if does not exist
 mkdir -p $output_dir
@@ -64,7 +64,7 @@ for np in 1 2 4 8 16 32 64 128; do
     for G_solver in "${solvers[@]}"; do
         for F_solver in "${solvers[@]}"; do
             if [[ -f data-$np-$G_solver-$F_solver.txt ]]; then
-                cat data-$np-$G_solver-$F_solver.txt >> $data_file
+                cat data-speedup-$np-$G_solver-$F_solver.txt >> $data_file
                 rm data-$np-$G_solver-$F_solver.txt
             fi
         done
