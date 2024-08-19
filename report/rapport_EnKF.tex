@@ -260,19 +260,15 @@ These observations, generated from the system's true state
 with added noise, were used to update the state estimates 
 at each time step.
 
-\subsubsection{Implementation of the EnKF}
-\textbf{1. Ensemble Initialization:}
-The state ensembles were initialized around the known 
-initial condition $u_0 = 5., -5., 20.$, 
-with a random perturbation to introduce initial uncertainty.\\
-\textbf{2. State Propagation:}
-Each state vector was propagated independently through the 
-dynamics of the Lorenz system using the explicit Euler method.\\
-\textbf{3. Update with Observations:}
-At each time step, synthetic observations were used to correct 
-the EnKF predictions by adjusting the estimated states 
-based on the difference between the predictions and the 
-observations.\\
+
+\paragraph{Steps of the EnKF on the Lorenz System}
+\vspace{0.5cm} 
+
+\begin{itemize}
+  \item \textbf{1. Ensemble Initialization:} The state ensembles were initialized around the known initial condition $u_0 = 5., -5., 20.$, with a random perturbation to introduce initial uncertainty.
+  \item \textbf{2. State Propagation:} Each state vector was propagated independently through the dynamics of the Lorenz system using the explicit Euler method.
+  \item \textbf{3. Update with Observations:} At each time step, synthetic observations were used to correct the EnKF predictions by adjusting the estimated states based on the difference between the predictions and the observations.
+\end{itemize}
 
 After applying the EnKF, the estimated trajectories were 
 compared to the actual trajectories of the Lorenz system to 
@@ -288,8 +284,8 @@ states, which helped to explain the deviations observed in the 3D plots.
 Before applying the Ensemble Kalman Filter (EnKF) to the 
 Lorenz system, preliminary tests were conducted on simpler 
 ordinary differential equations (ODEs) to validate the EnKF implementation. These simpler ODEs serve as a testbed to understand the behavior of the filter in less complex contexts.
-
-\textbf{Test 1 :} Solving the ODE   $\frac{dy}{dt} = -t \cdot y^2$.
+\begin{itemize}
+  \item    \textbf{Test 1 :} Solving the ODE   $\frac{dy}{dt} = -t \cdot y^2$.
 
 The equation is solved with the initial condition  
 $y(0)=1.0$ using the explicit Euler method. The time step 
@@ -297,13 +293,11 @@ used is  $dt=0.05$ for a total duration ofde $T=4.0$.
 The EnKF is configured with an ensemble of $N=20$ members, 
 generating initial perturbations around $y_0=1.0$ 
 to simulate uncertainties. The state transition function 
-is defined as \[
-f(x, dt) = x - t \cdot x^2 \cdot dt
-\], while the observation function is $h(x)=x$. The process and observation 
+is defined as $f(x, dt) = x - t \cdot x^2 \cdot dt $, while the observation function is $h(x)=x$. The process and observation 
 covariances are set to $Q=0.01$ and $R=0.1$, respectively.
 
 
-\textbf{Test 2:} Solving the ODE $frac{dy}{dt} = -y + cos(t)$.
+\item     \textbf{Test 2:} Solving the ODE $\frac{dy}{dt} = -y + cos(t)$.
 
 The equation is solved starting with the initial condition 
 $y(0)=0.0$  using the explicit Euler method. The time step 
@@ -311,18 +305,12 @@ is $dt=0.05$, and the simulation runs for a total duration
 of $T=5.0$. The EnKF is configured with an ensemble of 
 $N=20$ members, with initial perturbations around $y_0=0.0$ 
 to simulate uncertainties. The state transition function 
-is defined as 
-
-\[
-f(x, dt) = x - x \cdot dt + \cos(t) \cdot dt
-\]
-
-
-, and the 
+is defined as $f(x, dt) = x - x \cdot dt + \cos(t) \cdot dt $, and the 
 observation function is $h(x)=x$. The process and 
 observation covariances are set to $Q=0.01$ and $R=0.1$, respectively.
-\subsubsection{Impact of the Observation Covariance Matrix $R$}
+\end{itemize}
 
+\subsubsection{Impact of the Observation Covariance Matrix $R$}
 The observation covariance matrix $R$ plays a crucial role in the performance 
 of the EnKF by directly influencing the accuracy of trajectory estimates. 
 $R$ represents the confidence assigned to the observations; a lower value 
