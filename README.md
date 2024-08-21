@@ -1,7 +1,8 @@
-# Parareal Algorithm
+# Parareal Algorithm and Ensemble Kalman Filter
 
 ## Project Description
 This project focuses on the development and implementation of the parareal algorithm in both sequential and parallel formats. The algorithm will be applied to the Lorenz Model of order 1 and 4, using both constant and adaptive time stepping.
+Additionally, the Ensemble Kalman Filter (EnKF) will be implemented to estimate the state of the Lorenz system, providing a comparative approach to state estimation in chaotic systems. This combination allows for a robust analysis of numerical methods in handling complex, nonlinear dynamical systems.
 
 ## Roadmap
 1. Implement Lorenz Model for order 1 and 4 using constant time stepping.
@@ -13,6 +14,9 @@ This project focuses on the development and implementation of the parareal algor
 7. Compare different ode solvers and parareal on the Lorenz system.
 8. Study a parallel version of the parareal algorithm.
 9. Implement the parallel version of the parareal algorithm.
+10. Implement the Ensemble Kalman Filter (EnKF) on the Lorenz system.
+11. Study the impact of the covariance matrix R on the performance of the EnKF.
+12. Study the impact of the ensemble size N on the performance of the EnKF.
 
 ## Getting Started
 To get started with this project, clone the repository and install the required dependencies.
@@ -22,6 +26,8 @@ To get started with this project, clone the repository and install the required 
 - Scipy
 - Matplotlib (for visualization)
 - mpi4py (for parallelisation)
+- NumPy (for matrix operations)
+- FilterPy (for Kalman filtering)
 
 ## Installation
 1. Clone the repo
